@@ -1,16 +1,93 @@
 ﻿using System;
 using System.Threading;
+using AppiumPractice01.Extensions;
+using AppiumPractice01.WindowsCalculatorPageObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Enums;
 using OpenQA.Selenium.Appium.Service;
 using OpenQA.Selenium.Appium.Windows;
+using OpenQA.Selenium.Support.UI;
 
 namespace AppiumPractice01
 {
     [TestClass]
     public class Appium01
     {
+        [TestMethod]
+        public void TestCustomFindElementExtension()
+        {
+            var cap = new AppiumOptions();
+            cap.AddAdditionalCapability(MobileCapabilityType.App, "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
+            cap.AddAdditionalCapability(MobileCapabilityType.PlatformName, "Windows");
+            cap.AddAdditionalCapability(MobileCapabilityType.DeviceName, "WindowsPC");
+            var appiumLocalServer = new AppiumServiceBuilder().UsingAnyFreePort().Build();
+            appiumLocalServer.Start();
+            var driver = new WindowsDriver<WindowsElement>(appiumLocalServer, cap);
+
+            // This should fail! "abcxyz" does not exist.
+            driver.FindElement(MobileBy.AccessibilityId("abcxyz"), 
+                TimeSpan.FromSeconds(3), 
+                TimeSpan.FromMilliseconds(500));
+
+            driver.Close();
+            driver.Dispose();
+        }
+
+        [TestMethod]
+        [Ignore]
+        public void TestWaitForElementToAppearAndInteractWithThatElement()
+        {
+            var cap = new AppiumOptions();
+            cap.AddAdditionalCapability(MobileCapabilityType.App, "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
+            cap.AddAdditionalCapability(MobileCapabilityType.PlatformName, "Windows");
+            cap.AddAdditionalCapability(MobileCapabilityType.DeviceName, "WindowsPC");
+            var appiumLocalServer = new AppiumServiceBuilder().UsingAnyFreePort().Build();
+            appiumLocalServer.Start();
+            var driver = new WindowsDriver<WindowsElement>(appiumLocalServer, cap);
+
+            // Wait until an element appears and then interact with that element
+            var wait = new DefaultWait<WindowsDriver<WindowsElement>>(driver)
+            {
+                Timeout = TimeSpan.FromSeconds(60),
+                PollingInterval = TimeSpan.FromMilliseconds(500)
+            };
+            wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            var element = wait.Until(x => {
+                return x.FindElementByAccessibilityId("num7Button");
+            });
+            element.Click();
+
+            driver.Close();
+            driver.Dispose();
+        }
+
+        [TestMethod]
+        [Ignore]
+        public void TestWaitForElementToAppear()
+        {
+            var cap = new AppiumOptions();
+            cap.AddAdditionalCapability(MobileCapabilityType.App, "Microsoft.WindowsCalculator_8wekyb3d8bbwe!App");
+            cap.AddAdditionalCapability(MobileCapabilityType.PlatformName, "Windows");
+            cap.AddAdditionalCapability(MobileCapabilityType.DeviceName, "WindowsPC");
+            var appiumLocalServer = new AppiumServiceBuilder().UsingAnyFreePort().Build();
+            appiumLocalServer.Start();
+            var driver = new WindowsDriver<WindowsElement>(appiumLocalServer, cap);
+
+            // Wait until an element appears
+            var wait = new DefaultWait<WindowsDriver<WindowsElement>>(driver)
+            {
+                Timeout = TimeSpan.FromSeconds(60),
+                PollingInterval = TimeSpan.FromMilliseconds(500)
+            };
+            wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
+            wait.Until(x => x.FindElementByAccessibilityId("num7Button"));
+
+            driver.Close();
+            driver.Dispose();
+        }
+
         [TestMethod]
         [Ignore]
         public void TestFindElement()
@@ -59,7 +136,6 @@ namespace AppiumPractice01
             appiumLocalServer.Start();
 
             var driver = new WindowsDriver<WindowsElement>(appiumLocalServer, cap);
-            Thread.Sleep(3000);
             driver.Close();
             driver.Dispose();
         }
@@ -79,7 +155,6 @@ namespace AppiumPractice01
             cap.AddAdditionalCapability(MobileCapabilityType.DeviceName, deviceName);
 
             var driver = new WindowsDriver<WindowsElement>(uniformResourceId, cap);
-            Thread.Sleep(3000);
             driver.Close();
             driver.Dispose();
         }
