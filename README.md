@@ -1,3 +1,3 @@
 # AppiumDesktopDemo
 
-#### Basis demo of desktop app automation using Appium.
+##### Desktop app automation using Appium.
