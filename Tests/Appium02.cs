@@ -1,5 +1,4 @@
-﻿using System;
-using AppiumPractice01.WindowsCalculatorPageObjects;
+﻿using AppiumPractice01.WindowsCalculatorPageObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AppiumPractice01.Tests
