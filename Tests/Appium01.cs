@@ -12,10 +12,11 @@ using OpenQA.Selenium.Support.UI;
 
 namespace AppiumPractice01
 {
-    [TestClass]
+    //[TestClass]
     public class Appium01
     {
         [TestMethod]
+        [Ignore]
         public void TestCustomFindElementExtension()
         {
             var cap = new AppiumOptions();

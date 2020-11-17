@@ -8,7 +8,7 @@ namespace AppiumPractice01.Tests
     public class Appium02
     {
         [TestMethod]
-        public void Standard_AddTwoNumbers()
+        public void StandardCalculator_VerifyTwoNumbersCanBeAdded()
         {
             // Given I open the Calculator application
             Driver.StartApp();
@@ -23,7 +23,7 @@ namespace AppiumPractice01.Tests
         }
 
         [TestMethod]
-        public void Scientific_SquareNumber()
+        public void ScientificCalculator_VerifyAbilityToSquareNumber()
         {
             Driver.StartApp();
             ScientificPage.GoTo();
@@ -33,7 +33,7 @@ namespace AppiumPractice01.Tests
         }
 
         [TestMethod]
-        public void Scientific_GetAnAttribute_01()
+        public void ScientificCalculator_VerifyRecipricalDoesNotHaveKeyboardFocus_version1()
         {
             Driver.StartApp();
             ScientificPage.GoTo();
@@ -42,7 +42,7 @@ namespace AppiumPractice01.Tests
         }
 
         [TestMethod]
-        public void Scientific_GetAnAttribute_02()
+        public void ScientificCalculator_VerifyRecipricalDoesNotHaveKeyboardFocus_version2()
         {
             Driver.StartApp();
             ScientificPage.GoTo();
