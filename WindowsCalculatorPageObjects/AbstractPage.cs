@@ -8,6 +8,9 @@ namespace AppiumPractice01.WindowsCalculatorPageObjects
 {
     public class AbstractPage
     {
+        
+        // DELETE LATER - This functionality has been moved into an extension method.
+        /*
         protected static WindowsElement Wait(By element, TimeSpan waitTime, TimeSpan pollingTime)
         {
             var wait = new DefaultWait<WindowsDriver<WindowsElement>>(Driver.Instance());
@@ -16,5 +19,7 @@ namespace AppiumPractice01.WindowsCalculatorPageObjects
             wait.IgnoreExceptionTypes(typeof(NoSuchElementException));
             return wait.Until(x => { return x.FindElement(element);});            
         }
+        */
+        
     }
 }
