@@ -1,6 +1,7 @@
 # AppiumDesktopDemo
 
-## This is a simple demonstration of using Appium to write automated tests. The application being tested is the Windows 10 Calculator application.
+###### Simple demonstration of using Appium to write automated tests.
+###### The application being tested is the Windows 10 Calculator application.
 
 ### Appium requirements
 ##### (1) Windows 10 is in "Developer Mode"
