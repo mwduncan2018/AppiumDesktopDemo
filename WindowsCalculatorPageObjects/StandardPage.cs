@@ -18,12 +18,15 @@ namespace AppiumPractice01.WindowsCalculatorPageObjects
 
         public static void AddNumbers(int[] numbers)
         {
-            Driver.Instance().FindElement(DISPLAY_RESULT, TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(500)).Clear();
+            Driver.Instance().FindElement(DISPLAY_RESULT, 
+                TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(500)).Clear();
             IEnumerable<int> numberList = new List<int>(numbers);
             foreach (var number in numberList)
             {
-                Driver.Instance().FindElement(DISPLAY_RESULT, TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(500)).SendKeys(number.ToString());
-                Driver.Instance().FindElement(PLUS_BUTTON, TimeSpan.FromSeconds(1), TimeSpan.FromMilliseconds(500)).Click();
+                Driver.Instance().FindElement(DISPLAY_RESULT, TimeSpan.FromSeconds(1), 
+                    TimeSpan.FromMilliseconds(500)).SendKeys(number.ToString());
+                Driver.Instance().FindElement(PLUS_BUTTON, TimeSpan.FromSeconds(1), 
+                    TimeSpan.FromMilliseconds(500)).Click();
             }
         }
 
@@ -31,11 +34,8 @@ namespace AppiumPractice01.WindowsCalculatorPageObjects
         {
             try
             {
-                bool result = (Int32.Parse(Driver.Instance().FindElement(DISPLAY_RESULT).GetAttribute("Name").Replace("Display is ", ""))) == value ? true : false;
-                if (result)
-                    return true;
-                else
-                    return false;
+                return (Int32.Parse(Driver.Instance().FindElement(DISPLAY_RESULT)
+                    .GetAttribute("Name").Replace("Display is ", ""))) == value;
             }
             catch (FormatException)
             {
